@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "877374727122",
+    "project_id": "exam-2bfe7",
+    "storage_bucket": "exam-2bfe7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:877374727122:android:43d8cb871c826af8aa5e0b",
+        "android_client_info": {
+          "package_name": "ir.rezah.exammanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "877374727122-o3msd52u1imp3sur2mgnpm2u1edrhpii.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSsMFnoimlgqkzMPE8v2tKNVhowVD2VAk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "877374727122-o3msd52u1imp3sur2mgnpm2u1edrhpii.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

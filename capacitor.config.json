@@ -1,0 +1,12 @@
+{
+  "appId": "ir.rezah.exammanager",
+  "appName": "مدیریت آزمون‌ها",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "plugins": {
+    "FirebaseAuthentication": {
+      "skipNativeAuth": false,
+      "providers": ["google.com"]
+    }
+  }
+}

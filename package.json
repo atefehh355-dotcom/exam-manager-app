@@ -1,0 +1,21 @@
+{
+  "name": "exam-manager-android",
+  "version": "1.0.0",
+  "private": true,
+  "description": "بسته‌بندی اندرویدی اپ مدیریت آزمون‌ها با Capacitor",
+  "scripts": {
+    "build-native-auth": "esbuild native-auth-src/native-auth-bridge.js --bundle --format=iife --global-name=NativeGoogleAuthModule --outfile=www/native-auth-bridge.js",
+    "sync": "npm run build-native-auth && npx cap sync android",
+    "open:android": "npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor-firebase/authentication": "^6.0.0",
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/core": "^6.0.0",
+    "firebase": "^10.13.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.0.0",
+    "esbuild": "^0.23.0"
+  }
+}
