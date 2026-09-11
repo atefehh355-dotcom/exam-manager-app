@@ -1,0 +1,62 @@
+name: Build Android APK
+
+# هر بار که کدی به شاخه‌ی main پوش (push) بشه، این کارگاه خودکار
+# اجرا می‌شه و یک APK قابل‌نصب می‌سازه.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: دریافت کد پروژه
+        uses: actions/checkout@v4
+
+      - name: نصب Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: نصب Java (برای Gradle/Android)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: نصب پکیج‌های npm
+        run: npm install
+
+      - name: ساخت باندل ورود بومی با گوگل
+        run: npm run build-native-auth
+
+      - name: اضافه‌کردن پلتفرم اندروید (فقط اگر قبلاً وجود نداشته باشد)
+        run: |
+          if [ ! -d "android" ]; then
+            npx cap add android
+          fi
+
+      - name: بررسی وجود google-services.json
+        run: |
+          if [ ! -f "android/app/google-services.json" ]; then
+            echo "❌ فایل android/app/google-services.json پیدا نشد."
+            echo "این فایل رو از کنسول Firebase دانلود کن و توی همون مسیر قرار بده، بعد دوباره پوش کن."
+            exit 1
+          fi
+
+      - name: همگام‌سازی Capacitor با پروژه‌ی اندروید
+        run: npx cap sync android
+
+      - name: مجوز اجرا برای gradlew
+        run: chmod +x android/gradlew
+
+      - name: ساخت APK نسخه‌ی دیباگ (قابل نصب مستقیم روی گوشی)
+        working-directory: android
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: آپلود APK به‌عنوان خروجی این اجرا
+        uses: actions/upload-artifact@v4
+        with:
+          name: exam-manager-debug-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
